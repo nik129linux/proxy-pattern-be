@@ -98,8 +98,8 @@ class MetricsApiTest {
 
         assertThat(summary.get("totalCalls").asInt()).isEqualTo(2000);
         assertThat(service(summary, "payments").get("errorRate").asDouble()).isGreaterThan(0.15);
-        assertThat(service(summary, "inventory").get("errorRate").asDouble()).isLessThan(0.15);
-        assertThat(service(summary, "orders").get("errorRate").asDouble()).isLessThan(0.15);
+        assertThat(service(summary, "inventory").get("errorRate").asDouble()).isLessThan(0.09);
+        assertThat(service(summary, "orders").get("errorRate").asDouble()).isLessThan(0.09);
     }
 
     @Test
