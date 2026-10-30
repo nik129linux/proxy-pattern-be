@@ -93,6 +93,14 @@ class CallLogStoreTest {
     }
 
     @Test
+    void ordersByCallTimestampNotByFinishOrder() {
+        store.finished(entry("inventory", CallStatus.SUCCESS, 1, T0.plusSeconds(1)));
+        store.finished(entry("payments", CallStatus.SUCCESS, 2, T0));
+
+        assertThat(all().content().get(0).serviceId()).isEqualTo("inventory");
+    }
+
+    @Test
     void filtersCombineAndDatesAreInclusive() {
         store.finished(entry("orders", CallStatus.SUCCESS, 1, T0));
         store.finished(entry("orders", CallStatus.ERROR, 2, T0.plusSeconds(10)));

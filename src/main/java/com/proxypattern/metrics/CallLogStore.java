@@ -3,6 +3,7 @@ package com.proxypattern.metrics;
 import java.time.Instant;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -97,6 +98,7 @@ public class CallLogStore implements CallLog {
             }
             filtered.add(e);
         }
+        filtered.sort(Comparator.comparing(LogEntry::timestamp).reversed());
         long total = filtered.size();
         int size = query.size();
         int totalPages = total == 0 || size <= 0 ? 0 : (int) ((total + size - 1) / size);
